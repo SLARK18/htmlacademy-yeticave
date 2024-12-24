@@ -21,6 +21,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 if ($id) {
    $sql = get_query_lot ($id);
 } else {
+   include_once './pages/404.html';
    http_response_code(404);
    die();
 }
@@ -34,6 +35,7 @@ if ($res) {
 }
 
 if(!$lot) {
+   include_once './pages/404.html';
    http_response_code(404);
    die();
 }
