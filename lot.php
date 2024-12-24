@@ -34,7 +34,7 @@ if ($res) {
    $error = mysqli_error($con);
 }
 
-if(!$lot) {
+if(!isset($lot)) {
    include_once './pages/404.html';
    http_response_code(404);
    die();
