@@ -21,3 +21,10 @@ function get_query_lot ($id_lot) {
     WHERE lots.id=$id_lot;";
 }
 
+/**
+ * Формирует SQL-запрос для получения списка категорий: id, character_code, имя категории
+ * @return string SQL-запрос
+ */
+function get_query_categories () {
+    return "SELECT id, character_code, name_category FROM categories";
+}

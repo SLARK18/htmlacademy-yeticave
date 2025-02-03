@@ -13,11 +13,29 @@
  *
  * @return bool true при совпадении с форматом 'ГГГГ-ММ-ДД', иначе false
  */
-function is_date_valid(string $date) : bool {
-    $format_to_check = 'Y-m-d';
-    $dateTimeObj = date_create_from_format($format_to_check, $date);
+function is_date_valid($date) {
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+}
 
-    return $dateTimeObj !== false && array_sum(date_get_last_errors()) === 0;
+/**
+ * Get the ID of a category by its name.
+ *
+ * This function iterates through an array of categories and returns the ID of the category
+ * that matches the given name. If no category with the specified name is found, it returns null.
+ *
+ * @param array $categories An array of categories, where each category is an associative array
+ *                          with keys 'name_category' and 'id'.
+ * @param string $name The name of the category to search for.
+ * @return int|null The ID of the category if found, or null if not found.
+ */
+function getCategoryIDByName($categories, $name) {
+    foreach ($categories as $category) {
+        if ($category['name_category'] === $name) {
+        return $category['id'];
+        }
+    }
+    return null;
 }
 
 /**

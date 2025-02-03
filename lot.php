@@ -6,18 +6,10 @@ require_once("init.php");
 require_once("models.php");
 
 
-if (!$con) {
-   $error = mysqli_connect_error();
-} else {
-   $sql = "SELECT character_code, name_category FROM categories";
-   $result = mysqli_query($con, $sql);
-   if ($result) {
-      $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-   } else {
-      $error = mysqli_error($con);
-   }
-}
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$categories = $con->query("SELECT character_code, name_category, id FROM categories");
+$categories = $categories->fetchAll();
+
+$id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 if ($id) {
    $sql = get_query_lot ($id);
 } else {
@@ -27,12 +19,7 @@ if ($id) {
 }
 
 
-$res = mysqli_query($con, $sql);
-if ($res) {
-   $lot = mysqli_fetch_assoc($res);
-} else {
-   $error = mysqli_error($con);
-}
+$lot = $con->query($sql)->fetch();
 
 if(!isset($lot)) {
    include_once './pages/404.html';

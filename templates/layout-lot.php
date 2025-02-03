@@ -49,7 +49,7 @@
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?= $category["name_category"]; ?></a>
             </li>
-            <?php endforeach; ?>
+      <?php endforeach; ?>
       </ul>
     </nav>
     <section class="lot-item container"><?= $content; ?></section>
@@ -64,7 +64,7 @@
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?= $category["name_category"]; ?></a>
             </li>
-            <?php endforeach; ?>
+    <?php endforeach; ?>
     </ul>
   </nav>
   <div class="main-footer__bottom container">

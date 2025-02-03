@@ -6,26 +6,13 @@ require_once("init.php");
 require_once("models.php");
 
 
-if (!$con) {
-   $error = mysqli_connect_error();
-} else {
-   $sql = "SELECT character_code, name_category FROM categories";
-   $result = mysqli_query($con, $sql);
-   if ($result) {
-        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } else {
-        $error = mysqli_error($con);
-      }
-}
+$categories = $con->query("SELECT character_code, name_category, id FROM categories");
+$categories = $categories->fetchAll();
 
-$sql = get_query_list_lots ('2021-07-15');
 
-$res = mysqli_query($con, $sql);
-if ($res) {
-   $goods = mysqli_fetch_all($res, MYSQLI_ASSOC);
-} else {
-   $error = mysqli_error($con);
-}
+$sql = get_query_list_lots('2021-07-15');
+
+$goods = $con->query($sql)->fetchAll();
 
 $page_content = include_template("main.php", [
    "categories" => $categories,
