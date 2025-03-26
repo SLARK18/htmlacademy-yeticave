@@ -18,6 +18,8 @@ function is_date_valid($date) {
     return $d && $d->format('Y-m-d') === $date;
 }
 
+
+
 /**
  * Get the ID of a category by its name.
  *
@@ -162,3 +164,48 @@ function include_template($name, array $data = []) {
 }
 
 
+/**
+ * Checks if the given string is a valid email address.
+ *
+ * This function uses a regular expression to validate the email address format.
+ *
+ * @param string $email The email address to validate.
+ * @return bool True if the email address is valid, false otherwise.
+ */
+function is_valid_email($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) 
+    && preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email);
+}
+
+/**
+ * Checks if the given string is a valid username.
+ *
+ * This function uses a regular expression to validate the username format.
+ *
+ * @param string $username The username to validate.
+ * @return bool True if the username is valid, false otherwise.
+ */
+function is_valid_name(string $username): bool {
+    // This regular expression pattern matches strings that are 3 to 20 characters long
+        // and consist only of uppercase and lowercase letters, digits, and underscores.
+    $pattern = '/^[a-zA-Z0-9_]{3,20}$/';
+
+    // preg_match returns 1 if the string matches the pattern, otherwise 0.
+    return preg_match($pattern, $username) === 1;
+}
+
+/**
+ * Outputs debug information to the browser's JavaScript console
+ *
+ * @param mixed $data The data to be output to console. Can be string or array
+ * @return void Prints JavaScript code directly to page output
+ *
+ * If array is passed, it will be imploded with commas before output
+ */
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}

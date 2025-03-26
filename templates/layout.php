@@ -1,15 +1,10 @@
-<?php
-//$is_auth = rand(0, 1);
-
-//$user_name = 'Ярослав'; // укажите здесь ваше имя
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?= $title; ?></title>
-    <link href="../css/normalize.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="./css/normalize.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-wrapper">
@@ -18,30 +13,30 @@
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
         <a class="main-header__logo">
-            <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
+            <img src="./img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
         <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
-        <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
+        <a class="main-header__add-lot button" href="add-lot.php">Добавить лот</a>
 
         <nav class="user-menu">
 
         <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
-         <?php if ($is_auth): ?>
+         <?php if (isset($_SESSION['user'])): ?>
             <div class="user-menu__logged">
-               <p><?= $user_name; ?></p>
+               <p><?= $_SESSION['user']['user_name']; ?></p>
                <a  class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
-               <a  class="user-menu__logout" href="#">Выход</a>
+               <a  class="user-menu__logout" href="logout.php">Выход</a>
             </div>
          <?php else: ?>
             <ul class="user-menu__list">
                <li class="user-menu__item">
-                  <a href="#">Регистрация</a>
+                  <a href="sign-up.php">Регистрация</a>
                </li>
                <li class="user-menu__item">
-                  <a href="#">Выход</a>
+                  <a href="login.php">Вход</a>
                </li>
             </ul>
          <?php endif; ?>
@@ -65,7 +60,7 @@
     </nav>
     <div class="main-footer__bottom container">
         <div class="main-footer__copyright">
-            <p>© 2019, YetiCave</p>
+            <p>© 2025, YetiCave</p>
             <p>Интернет-аукцион сноубордического и горнолыжного снаряжения</p>
         </div>
         <div class="main-footer__social social">
@@ -104,6 +99,7 @@
         </div>
     </div>
 </footer>
+<?php debug_to_console($_SESSION['user']);?>
 
 <script src="flatpickr.js"></script>
 <script src="script.js"></script>

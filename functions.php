@@ -27,7 +27,7 @@ function get_time_left ($date) {
     $final_date = date_create($date);
     $cur_date = date_create("now");
     $diff = date_diff($final_date, $cur_date);
-    $format_diff = date_interval_format($diff, "%d %H %I");
+    $format_diff = $diff->format("%d %H %I");
     $arr = explode(" ", $format_diff);
 
     $hours = $arr[0] * 24 + $arr[1];
@@ -49,7 +49,7 @@ function get_time_left ($date) {
  * @param $sql string SQL запрос с плейсхолдерами вместо значений
  * @param array $data Данные для вставки на место плейсхолдеров
  *
- * @return stmt Подготовленное выражение
+ * @return mysqli_stmt Подготовленное выражение
  */
 function db_get_prepare_stmt_version($link, $sql, $data = []) {
     $stmt = mysqli_prepare($link, $sql);
